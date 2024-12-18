@@ -20,8 +20,8 @@
           <!-- Start contact Single Box -->
           <li class="contact-sidebar-single-box">
             <h3 class="title-text">Email:</h3>
-            <a href="mailto:devs@ebustech.com" class="link"
-              >dev.ebustech@gmail.com</a
+            <a href="mailto:ebubeireneaus@gmail.com" class="link"
+              >ebubeireneaus@gmail.com</a
             >
           </li>
           <!-- End contact Single Box -->

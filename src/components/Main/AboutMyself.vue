@@ -75,7 +75,7 @@
           </p>
           <p class="tw-w-full text-subtitle1" data-aos="flip-up">
             <i class="fa-solid fa-angle-right"></i>
-            <b> Website</b> <span>https://ireneaus.netlify.app</span>
+            <b> Website</b> <span>https://ebustech.com.ng</span>
           </p>
           <p class="tw-w-full text-subtitle1">
             <i class="fa-solid fa-angle-right"></i>
@@ -87,7 +87,7 @@
           </p>
           <p class="col-lg-6 col-12 text-subtitle1" data-aos="flip-up">
             <i class="fa-solid fa-angle-right"></i>
-            <b> Email</b> <span> okigweebube7@gmail.com</span>
+            <b> Email</b> <span> ebubeireneaus@gmail.com</span>
           </p>
           <p class="tw-w-full text-subtitle1" data-aos="flip-up">
             <i class="fa-solid fa-angle-right"></i>
