@@ -11,7 +11,7 @@
 
 
 const { configure } = require('quasar/wrappers');
-
+require('dotenv').config()
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -54,6 +54,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+    
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -62,7 +63,9 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        'NEWS_API_KEY': process.env.NEWS_API_KEY
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

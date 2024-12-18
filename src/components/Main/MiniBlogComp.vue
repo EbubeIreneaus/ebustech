@@ -15,7 +15,7 @@
         </div>
 
         <div class="tw-px-5 lg:tw-px-1 tw-max-w-6xl tw-mx-auto">
-          <div class="row mb-n5">
+          <div class="row mb-n5" v-if="blogs && blogs.length > 1">
             <div
               class="col-12 mb-5"
               v-for="(blog, index) in blogs"
@@ -77,10 +77,15 @@
 <script setup>
 import { useBlogStore } from 'src/stores/blogs';
 import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
 const { blogs } = storeToRefs(useBlogStore());
 // defineOptions({
 
 // })
-console.log(blogs.value);
+onMounted(() => {
+  console.log(blogs.value)
+  console.log(process.env.NEWS_API_KEY);
+  
+})
 </script>

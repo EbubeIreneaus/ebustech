@@ -50,11 +50,11 @@
                         {{ pr.desc }}
                       </p>
                       <p class="tw-capitalize tw-mb-2">
-                        <span class="text-primary"><b>Frontend:</b> </span>
+                        <span class="text-orange-13"><b>Frontend:</b> </span>
                         {{ pr.frontend }}
                       </p>
                       <p class="tw-capitalize">
-                        <span class="text-primary"><b>Backend:</b> </span>
+                        <span class="text-orange-13"><b>Backend:</b> </span>
                         {{ pr.backend }}
                       </p>
                       <div class="tw-flex tw-gap-3 tw-mt-4">
