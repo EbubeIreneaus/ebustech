@@ -5,159 +5,144 @@ defineOptions({
   name: 'MainLayout',
 });
 
-function navControl(){
+function navControl() {
   const body = document.body;
-      const offCanvasToggle = document.querySelectorAll('.offcanvas-toggle');
-      const offCanvas = document.querySelector('.offcanvas');
-      const offCanvasOverlay = document.querySelector('.offcanvas-overlay');
-      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-      const offCanvasClose = document.querySelectorAll('.offcanvas-close, .offcanvas-overlay');
-      const offCanvasLinks = document.querySelectorAll('.offcanvas-menu a');
+  const offCanvasToggle = document.querySelectorAll('.offcanvas-toggle');
+  const offCanvas = document.querySelector('.offcanvas');
+  const offCanvasOverlay = document.querySelector('.offcanvas-overlay');
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const offCanvasClose = document.querySelectorAll(
+    '.offcanvas-clos, .offcanvas-overlay'
+  );
+  const offCanvasLinks = document.querySelectorAll('.offcanvas-menu a');
 
-      offCanvasToggle.forEach(toggle => {
-        toggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.querySelector(toggle.getAttribute('href'));
-          body.classList.add('offcanvas-open');
-          target.classList.add('offcanvas-open');
-          offCanvasOverlay.style.display = 'block';
-          if (toggle.parentElement.classList.contains('mobile-menu-toggle')) {
-            toggle.classList.add('close');
-          }
-        });
-      });
-
-
-      const closeOffCanvas = (e) => {
-        e.preventDefault();
-        body.classList.remove('offcanvas-open');
-        offCanvas.classList.remove('offcanvas-open');
-        offCanvasOverlay.style.display = 'none';
-        const closeBtn = mobileMenuToggle.querySelector('a');
-        if (closeBtn) {
-          closeBtn.classList.remove('close');
-        }
-      };
-
-      offCanvasClose.forEach(close => {
-        close.addEventListener('click', (e) => {
-          e.preventDefault();
-          body.classList.remove('offcanvas-open');
-          offCanvas.classList.remove('offcanvas-open');
-          offCanvasOverlay.style.display = 'none';
-          const closeBtn = mobileMenuToggle.querySelector('a');
-          if (closeBtn) {
-            closeBtn.classList.remove('close');
-          }
-        });
-      });
-
-      offCanvasClose.forEach(close => {
-        close.addEventListener('click', closeOffCanvas);
-      });
-
-      offCanvasLinks.forEach(link => {
-        link.addEventListener('click', closeOffCanvas);
-      });
-
-}
-const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const stickyHeader = document.querySelector('.sticky-header');
-      if (scrollTop < 100) {
-        stickyHeader.classList.remove('sticky');
-      } else {
-        stickyHeader.classList.add('sticky');
+  offCanvasToggle.forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector('#mobile-menu-offcanvas');
+      body.classList.add('offcanvas-open');
+      target.classList.add('offcanvas-open');
+      offCanvasOverlay.style.display = 'block';
+      if (toggle.parentElement.classList.contains('mobile-menu-toggle')) {
+        toggle.classList.add('close');
       }
-    };
+    });
+  });
 
-onMounted(()=>{
-  navControl()
+  const closeOffCanvas = (e) => {
+    e.preventDefault();
+    body.classList.remove('offcanvas-open');
+    offCanvas.classList.remove('offcanvas-open');
+    offCanvasOverlay.style.display = 'none';
+    const closeBtn = mobileMenuToggle.querySelector('a');
+    if (closeBtn) {
+      closeBtn.classList.remove('close');
+    }
+  };
+
+  offCanvasClose.forEach((close) => {
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      body.classList.remove('offcanvas-open');
+      offCanvas.classList.remove('offcanvas-open');
+      offCanvasOverlay.style.display = 'none';
+      const closeBtn = mobileMenuToggle.querySelector('a');
+      if (closeBtn) {
+        closeBtn.classList.remove('close');
+      }
+    });
+  });
+
+  offCanvasClose.forEach((close) => {
+    close.addEventListener('click', closeOffCanvas);
+  });
+
+ 
+  offCanvasLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const targetId = link.getAttribute('href')
+      if (targetId.startsWith('#')) {
+        event.preventDefault()
+        document.querySelector(targetId).scrollIntoView()
+      }
+      closeOffCanvas(event)
+    });
+  });
+}
+
+const handleScroll = () => {
+  const scrollTop = window.scrollY;
+  const stickyHeader = document.querySelector('.header');
+  if (scrollTop < 100) {
+    stickyHeader.classList.remove('sticky');
+  } else {
+    stickyHeader.classList.add('sticky');
+  }
+};
+
+const handleMobileScroll = () => {
+  const scrollTop = window.scrollY;
+  const stickyHeader = document.querySelector('.m-header');
+  if (scrollTop < 100) {
+    stickyHeader.classList.remove('sticky');
+  } else {
+    stickyHeader.classList.add('sticky');
+  }
+};
+
+onMounted(() => {
+  navControl();
   window.addEventListener('scroll', handleScroll);
-})
+  window.addEventListener('scroll', handleMobileScroll);
+});
 
-onBeforeUnmount(()=>{
+onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll);
-})
+  window.removeEventListener('scroll', handleMobileScroll);
+});
 </script>
 
 <template>
   <div>
     <!-- .....:::::: Start Header Section :::::.... -->
-    <header class="header-section sticky-header d-none d-lg-block">
-      <div class="header-wrapper">
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-            <div class="col">
-              <!-- Start Header Logo -->
-              <router-link to="/" href="index.html" class="header-logo">
-                <!-- <q-img src="assets/images/logo/logo.png" alt="img not found" /> -->
-                <h1 class="text-weight-bolder">EBUSTECH</h1>
-              </router-link>
-              <!-- End Header Logo -->
+    <header class="header tw-hidden lg:tw-block">
+      <div class="">
+        <div class="tw-container tw-mx-auto">
+          <div class="tw-flex tw-justify-between tw-items-center">
+            <div class="">
+              <q-img
+                src="~assets/logo.webp"
+                alt="Website Developers - Ebustech web development service"
+                height="50px"
+                class="tw-w-[200px]"
+              />
             </div>
-            <div class="col-auto">
+            <div class="tw-flex-grow tw-flex tw-justify-center">
               <!-- Start Header Menu -->
               <ul class="header-nav">
-                <li><router-link to="/">Home</router-link></li>
-                <li><router-link to="/about">About</router-link></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li class="has-dropdown">
-                  <router-link to="/service">Service</router-link>
-                  <!-- <ul class="submenu">
-                    <li><a href="service-list.html">Services</a></li>
-                    <li><a href="service-details.html">Service Details</a></li>
-                  </ul> -->
+                  <a href="#service-we-provide">Service</a>
                 </li>
                 <li class="has-dropdown">
-                  <router-link to="/blog">Blog</router-link>
-                  <!-- <ul class="submenu">
-                    <li><a href="blog-list.html">Blog List Full Width</a></li>
-                    <li>
-                      <a href="blog-list-sidebar-left.html"
-                        >Blog List Left Sidebar</a
-                      >
-                    </li>
-                    <li>
-                      <a href="blog-list-sidebar-right.html"
-                        >Blog List Right Sidebar</a
-                      >
-                    </li>
-                    <li>
-                      <a href="blog-details.html">Blog Details Full Width</a>
-                    </li>
-                    <li>
-                      <a href="blog-details-sidebar-left.html"
-                        >Blog Details Left Sidebar</a
-                      >
-                    </li>
-                    <li>
-                      <a href="blog-details-sidebar-right.html"
-                        >Blog Details Right Sidebar</a
-                      >
-                    </li>
-                  </ul> -->
+                  <a href="#projects">Projects</a>
                 </li>
-                <!-- <li class="has-dropdown">
-                  <a href="#">Pages</a>
-                  <ul class="submenu">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="project-list.html">Project</a></li>
-                    <li><a href="project-details.html">Project Details</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="404-page.html">404 Page</a></li>
-                  </ul>
-                </li> -->
-                <li><router-link to="/contact">Contact</router-link></li>
+                <li class="has-dropdown">
+                  <a href="#blog">Blog</a>
+                </li>
+                <li><a href="#contact">Contact</a></li>
               </ul>
               <!-- End Header Menu -->
             </div>
-            <div class="col">
+            <div class="">
               <div class="header-btn-link text-end">
-                <router-link
-                  to="/contact"
+                <q-btn
+                  href="#contact"
+                  no-caps
                   class="btn btn-sm btn-outline-one icon-space-left"
                   >Hire Me <i class="icofont-double-right"></i
-                ></router-link>
+                ></q-btn>
               </div>
             </div>
           </div>
@@ -167,23 +152,24 @@ onBeforeUnmount(()=>{
     <!-- .....:::::: End Header Section :::::.... -->
 
     <!-- .....:::::: Start Mobile Header Section :::::.... -->
-    <div class="mobile-header d-block d-lg-none">
-      <div class="container">
-        <div class="row align-items-center justify-content-between">
-          <div class="col">
+    <div class="m-header lg:tw-hidden tw-block">
+      <div class="tw-container tw-px-5 tw-py-3">
+        <div class="tw-flex tw-justify-between tw-items-center">
+          <div class="">
             <div class="mobile-logo">
-              <router-link to="/"
-                >  <h1 class="text-weight-bolder">EBUSTECH</h1>
-              </router-link>
+              <a href="#home">
+                <q-img
+                  src="~assets/logo.webp"
+                  alt="Website Developers - Ebustech web development service"
+                  class="tw-w-[150px] md:tw-w-[200px]"
+                  height="50px"
+                />
+              </a>
             </div>
           </div>
-          <div class="col">
+          <div class="">
             <div class="mobile-action-link text-end">
-              <a
-                href="#mobile-menu-offcanvas"
-                class="offcanvas-toggle offside-menu"
-                ><i class="icofont-navigation-menu"></i
-              ></a>
+              <q-btn icon="fa fa-bars" dense class="offcanvas-toggle" flat/>
             </div>
           </div>
         </div>
@@ -196,39 +182,40 @@ onBeforeUnmount(()=>{
       id="mobile-menu-offcanvas"
       class="offcanvas offcanvas-rightside offcanvas-mobile-menu-section"
     >
-      <!-- Start Offcanvas Header -->
+     
       <div class="offcanvas-header text-end">
-        <button class="offcanvas-close">
-          <i class="icofont-close-line"></i>
-        </button>
+        <q-btn icon="cancel" flat  class="offcanvas-clos" />
       </div>
-      <!-- End Offcanvas Header -->
-      <!-- Start Offcanvas Mobile Menu Wrapper -->
+
       <div class="offcanvas-mobile-menu-wrapper">
-        <!-- Start Mobile Menu  -->
+        
         <div class="mobile-menu-bottom">
-          <!-- Start Mobile Menu Nav -->
           <div class="offcanvas-menu">
             <ul>
               <li>
-                <router-link to="/"><span>Home</span></router-link>
+                <a href="#home" ><span>Home</span></a>
               </li>
               <li>
-                <router-link to="/about"><span>About</span></router-link>
+                <a href="#about"><span>About</span></a>
               </li>
               <li>
-                <router-link to="/service"><span>Services</span></router-link>
+                <a href="#service-we-provide"
+                  ><span>Services</span></a
+                >
                 <!-- <ul class="mobile-sub-menu">
                   <li><a href="service-list.html">Service List</a></li>
                   <li><a href="service-details.html">Service Details</a></li>
                 </ul> -->
               </li>
               <li>
-                <router-link to="/blogs"><span>Blog</span></router-link>
+                <a href="#projects"><span>Projects</span></a>
+              </li>
+              <li>
+                <a href="#blog"><span>Blog</span></a>
               </li>
 
               <li>
-                <router-link to="/contact"><span>Contact</span></router-link>
+                <a href="#contact"><span>Contact</span></a>
               </li>
             </ul>
           </div>
@@ -240,18 +227,27 @@ onBeforeUnmount(()=>{
         <div class="mobile-contact-info text-center">
           <ul class="social-link">
             <li>
-              <a target="_blank" href="https://facebook.com/ebubeireneaus"
-                ><i class="icofont-facebook"></i
+              <a
+                target="_blank"
+                href="https://facebook.com/ebubeireneaus"
+                rel="nofollow"
+                ><i class="fab fa-facebook"></i
               ></a>
             </li>
             <li>
-              <a target="_blank" href="https://twitter.com/ebubeireneaus"
-                ><i class="icofont-twitter"></i
+              <a
+                target="_blank"
+                href="https://twitter.com/ebubeireneaus"
+                rel="nofollow"
+                ><i class="fab fa-twitter"></i
               ></a>
             </li>
             <li>
-              <a target="_blank" href="https://linkedin.com/in/ireneaus"
-                ><i class="icofont-linkedin"></i
+              <a
+                target="_blank"
+                href="https://instagram.com/EbubeIreneaus"
+                rel="nofollow"
+                ><i class="fab fa-instagram"></i
               ></a>
             </li>
           </ul>
@@ -265,93 +261,128 @@ onBeforeUnmount(()=>{
     <!-- Offcanvas Overlay -->
     <div class="offcanvas-overlay"></div>
 
-    <router-view />
+    <div>
+      <router-view />
+    </div>
 
-      <!-- ...::: Start Footer Section :::... -->
-      <footer class="footer-section section-bg overflow-hidden pos-relative">
-            <div class="footer-inner-shape-top-left"></div>
-            <div class="footer-inner-shape-top-right"></div>
-            <div class="footer-section-top section-gap-t-165">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- Start Section Content -->
-                            <div class="section-content pos-relative text-center">
-                                <span class="section-tag">Get Latest Updates</span>
-                                <h2 class="section-title">Subscribe For Newsletter</h2>
-                            </div>
-                            <!-- End Section Content -->
-                        </div>
-                    </div>
-                    <div class="footer-top-wrapper text-center">
-                        <div class="row">
-                            <div class="col-12">
-                                <form action="#" class="footer-newsletter">
-                                    <input type="email" placeholder="demo@example.com">
-                                    <button class="submit-btn" type="submit">Subscribe Now</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- ...::: Start Footer Section :::... -->
+    <footer class="footer-section section-bg overflow-hidden pos-relative">
+      <div class="footer-inner-shape-top-left"></div>
+      <div class="footer-inner-shape-top-right"></div>
+
+      <div class="footer-center section-gap-tb-165">
+        <div class="tw-container tw-mx-auto tw-px-5 lg:tw-px-1">
+          <div class="section-content">
+            <span class="section-tag">My Social</span>
+            <h2 class="section-title">Follow Me.</h2>
+          </div>
+          <div class="mb-n5">
+            <div class="col-auto mb-5">
+              <!-- Start Single Footer Info -->
+              <div class="footer-single-info">
+                <ul class="social-link">
+                  <li>
+                    <a
+                      href="https://www.facebook.com/ebubeireneaus"
+                      target="_blank"
+                      rel="nofollow"
+                      ><i class="fab fa-facebook"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.instagram.com/ebubeireneaus"
+                      target="_blank"
+                      rel="nofollow"
+                      ><i class="fab fa-instagram"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.twitter.com/ebubeireneaus"
+                      target="_blank"
+                      rel="nofollow"
+                      ><i class="fab fa-twitter"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- Start Single Footer Info -->
             </div>
-            <div class="footer-center section-gap-tb-165">
-                <div class="container">
-                    <div class="row justify-content-between align-items-center mb-n5">
-                        <div class="col-auto mb-5">
-                            <!-- Start Single Footer Info -->
-                            <div class="footer-single-info">
-                                <a href="tel:+2348061982520" class="info-box">
-                                    <span class="icon"><i class="icofont-phone"></i></span>
-                                    <span class="text">+2348061982520</span>
-                                </a>
-                            </div>
-                            <!-- Start Single Footer Info -->
-                        </div>
-                        <div class="col-auto mb-5">
-                            <!-- Start Single Footer Info -->
-                            <div class="footer-single-info">
-                                <a href="mailto:demo@example.com" class="info-box">
-                                    <span class="icon"><i class="icofont-envelope-open"></i></span>
-                                    <span class="text">devs@ebustech.com.ng</span>
-                                </a>
-                            </div>
-                            <!-- Start Single Footer Info -->
-                        </div>
-                        <div class="col-auto mb-5">
-                            <!-- Start Single Footer Info -->
-                            <div class="footer-single-info">
-                                <ul class="social-link">
-                                    <li><a href="https://www.facebook.com/ebubeireneaus" target="_blank"><i class="icofont-facebook"></i></a></li>
-                                    <li><a href="https://www.tiktok.com/ebubeireneaus" target="_blank"><i class="icofont-instagram"></i></a></li>
-                                    <li><a href="https://www.twitter.com/ebubeireneaus" target="_blank"><i class="icofont-twitter"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Start Single Footer Info -->
-                        </div>
-                    </div>
-                </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="tw-container tw-mx-auto tw-px-5 lg:tw-px-1">
+          <div
+            class=""
+          >
+            <div class="col-auto">
+              <div class="footer-copyright">
+                <p class="copyright-text">
+                  &copy; {{ new Date().getFullYear() }} &nbsp;
+                  <router-link to="/">EBUBE IRENEAUS</router-link>
+                </p>
+              </div>
             </div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row justify-content-center justify-content-md-between align-items-center flex-column-reverse flex-md-row">
-                        <div class="col-auto">
-                            <div class="footer-copyright">
-                                <p class="copyright-text">&copy; {{ new Date().getFullYear() }} <router-link to="/">EBUBE IRENEAUS</router-link></p>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <router-link to="/" class="footer-logo">
-                                <div class="logo">
-                                    <!-- <img src="assets/images/logo/logo.png" alt=""> -->
-                                     EBUSTECH
-                                </div>
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- ...::: End Footer Section :::... -->
+            
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ...::: End Footer Section :::... -->
   </div>
 </template>
+
+<style scoped>
+.header,
+.m-header {
+  background-color: transparent;
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+}
+.header.sticky,
+.m-header.sticky {
+  position: fixed !important;
+  z-index: 99;
+  width: 100%;
+  top: 0;
+  background: #252734;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 0.9s cubic-bezier(0.2, 1, 0.22, 1) 0s;
+  border-bottom: 0;
+}
+
+.email-pics {
+  width: 300px;
+  height: 80px;
+  object-fit: cover;
+  object-position: center;
+  display: inline;
+  transform: scale(1.6);
+}
+@media (max-width: 780px) {
+  .email-pics {
+    margin-left: -25px;
+  }
+}
+@media (max-width: 480px) {
+  .email-pics {
+    transform: scale(1.4);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+</style>

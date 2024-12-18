@@ -6,31 +6,31 @@
 // import { useQuasar, QSpinnerFacebook } from 'quasar';
 import { useMeta } from 'quasar';
 import { MetaOptions } from 'quasar/dist/types/meta';
-import {  provide, onMounted } from 'vue';
+import { provide, onMounted } from 'vue';
+
 
 defineOptions({
   name: 'App',
 });
-const backend = process.env.DEV
+const backend = !process.env.DEV
   ? 'http://127.0.0.1:8000/api'
   : 'https://server.ebustech.com.ng/api';
 
 provide('backend', backend);
 
 const description =
-  'Discover Ebustech, a proficient web and mobile application developer situated in Abuja, Nigeria. With a focus on web development,  I provide innovative solutions to clients worldwide.';
+  `Looking for a website that elevates your brand? Ebustech Web Design creates high-performing websites that boost visibility
+   and help you stand out globally.`;
 
 const metaData: MetaOptions = {
-  title: 'Ebustech - Web & Mobile App Developer',
+  title: 'Website designer Nigeria',
+  titleTemplate: title => `${title} - Ebustech Web Design Service.`,
   meta: {
     description: { name: 'description', content: description },
     keywords: {
       name: 'keywords',
-      content:
-        'web, website, developer, Nigeria, Abuja, FCT, Lagos, benin, enugu, anambra, nsukka, niger, state, designer, mobile app, android app, android, app, application, web development, mobile development, portfolio, programmer, coding, software development, app design, web design, digital solutions, Ebustech',
-    },
-    ogTitle: {
-      property: 'Ebustech - Web & Mobile App Developer',
+      content: `website designer, website developer, web design, web developer, website designer near me, build website, best website builders
+      web designers near me, website developers, web developers near me, ecommerce websites, web dev, website design websites,website landing page designer`,
     },
   },
 };
@@ -49,10 +49,11 @@ useMeta(metaData);
 // })
 
 // })
-onMounted(()=>{
+onMounted(() => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
     preloader.style.display = 'none';
   }
-})
+  
+});
 </script>

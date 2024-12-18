@@ -70,40 +70,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
 import { useFeedbackStore } from 'src/stores/feedback';
 import { storeToRefs } from 'pinia';
 
 const { feedbacks } = storeToRefs(useFeedbackStore());
-const swiperRef = ref(null);
 
-const prevSlide = () => {
-  if (swiperRef.value) {
-    swiperRef.value.slidePrev(); // Access the slidePrev method directly
-  }
-};
 
-const nextSlide = () => {
-  if (swiperRef.value) {
-    swiperRef.value.slideNext(); // Access the slideNext method directly
-  }
-};
 
-onMounted(() => {
-  const swiper = new Swiper('.tst-swipe', {
-    slidesPerView: window.innerWidth >= 768 ? 2 : 1,
-    loop: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    // navigation: {
-    //   nextEl: '.tst-button-next',
-    //   prevEl: '.tst-button-prev',
-    // },
-    spaceBetween: 30,
-  });
-
-  swiperRef.value = swiper;
-});
 </script>

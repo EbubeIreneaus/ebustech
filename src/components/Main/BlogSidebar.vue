@@ -59,21 +59,24 @@
                     <a
                       href="https://www.facebook.com/ebubeireneaus"
                       target="_blank"
+                      rel="nofollow"
                       ><i class="icofont-facebook"></i
                     ></a>
                   </li>
                   <li>
                     <a
-                      href="https://www.facebook.com/ebubeireneaus"
+                      href="https://www.twitter.com/ebubeireneaus"
                       target="_blank"
+                      rel="nofollow"
                       ><i class="icofont-twitter"></i
                     ></a>
                   </li>
                   <li>
                     <a
-                      href="https://www.linkedin.com/in/ireneaus"
+                      href="https://www.instagram.com/ebubeireneaus"
                       target="_blank"
-                      ><i class="icofont-linkedin"></i
+                      rel="nofollow"
+                      ><i class="icofont-instagram"></i
                     ></a>
                   </li>
                 </ul>

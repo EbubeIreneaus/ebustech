@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb-content">
-                                <h2 class="title">Services Details</h2>
+                                <h1 class="title">Services I Provide</h1>
                                 <ul class="breadcrumb-link">
                                     <li><route-link to="/">Home</route-link></li>
                                     <li class="active" aria-current="page">Service Details</li>

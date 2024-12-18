@@ -29,8 +29,6 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [
       'app.scss',
-      'vendor/vendor.min.css',
-      'plugins/plugins.min.css',
       'style.min.css'
     ],
 
@@ -38,7 +36,7 @@ module.exports = configure(function (/* ctx */) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v7',
-      // 'fontawesome-v6',
+      'fontawesome-v6',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -97,11 +95,11 @@ module.exports = configure(function (/* ctx */) {
 
       config: {
         brand: {
-          primary: '#2a2c39',
-          secondary: '#26A69A',
+          primary: '#252734',
+          'dark-blue': '#252734',
           accent: '#858792',
 
-          dark: '#1d1d1d',
+          dark: '#252734',
           'dark-page': '#121212',
 
           positive: '#21BA45',

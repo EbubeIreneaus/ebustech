@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * More info about this file:
  * https://v2.quasar.dev/quasar-cli-vite/developing-ssr/ssr-webserver
@@ -18,7 +20,7 @@ import {
   ssrRenderPreloadTag,
   ssrServeStaticContent,
 } from 'quasar/wrappers';
-
+import serverless from 'serverless-http'
 /**
  * Create your webserver and return its instance.
  * If needed, prepare your webserver to receive
@@ -53,14 +55,30 @@ export const create = ssrCreate((/* { ... } */) => {
  * For production, you can instead export your
  * handler for serverless use or whatever else fits your needs.
  */
-export const listen = ssrListen(async ({ app, port, isReady }) => {
-  await isReady();
-  return app.listen(port, () => {
-    if (process.env.PROD) {
-      console.log('Server listening at port ' + port);
+// export const listen = ssrListen(async ({ app, port, isReady }) => {
+//   await isReady();
+//   return app.listen(port, () => {
+//     if (process.env.PROD) {
+//       console.log('Server listening at port ' + port);
+//     }
+//   });
+// });
+
+export function listen ({ app, port, isReady, ssrHandler }: {app:any, port: any, isReady: any, ssrHandler: any}) {
+  if (process.env.DEV) {
+    isReady()
+    return app.listen(port, () => {
+      if (process.env.PROD) {
+        console.log('Server listening at port ' + port)
+      }
+    })
+  } else {
+    // 生产环境下：
+    return {
+      handler: serverless(ssrHandler)
     }
-  });
-});
+  }
+}
 
 /**
  * Should close the server and free up any resources.

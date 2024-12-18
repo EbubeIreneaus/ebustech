@@ -1,69 +1,86 @@
 <template>
   <!-- ...::: Start Project Display Section :::... -->
-  <div class="project-display-section section-gap-tb-165">
+  <div class="project-display-section section-gap-tb-165" id="projects">
     <div class="project-display-box">
-      <div class="container">
+      <div class="tw-container tw-mx-auto tw-px-3">
         <div class="row">
-          <div class="col-12 col-xl-12 d-block d-md-flex justify-content-between">
+          <div
+            class="col-12 col-xl-12 d-block d-md-flex justify-content-between"
+          >
             <!-- Start Section Content -->
             <div class="section-content pos-relative">
-              <span class="section-tag">Awesome Portfolio</span>
-              <h2 class="section-title">My Complete Projects</h2>
+              <span class="section-tag" data-aos="fade-up"
+                >Awesome Portfolio</span
+              >
+              <h2 class="section-title" data-aos="fade-right">
+                My Complete Projects
+              </h2>
             </div>
             <!-- End Section Content -->
-
-            <div class="default-nav-style mt-6 mb-6 mb-md-0">
-              <!-- Custom navigation buttons -->
-              <div class="slider-button prt-button-prev" @click="prevSlide">
-                <i class="icofont-double-left"></i>
-              </div>
-              <div class="slider-button prt-button-next" @click="nextSlide">
-                <i class="icofont-double-right"></i>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-      <div class="project-display-wrapper">
-        <div class="project-display-slider">
-          <!-- Swiper -->
-          <div class="swiper prt-swipe">
-            <div class="swiper-wrapper">
-              <!-- Slides -->
-              <div
-                class="swiper-slide project-box-single-item"
-                v-for="project, index in projects"
-                :key="index"
-              >
-                <div class="img-box">
-                  <div class="bg-overlay"></div>
-                  <div class="bg-image">
-                    <q-img
-                      src="assets/images/project/project-slider-img-1.jpg"
-                      alt="Project Image"
-                    />
+      <div>
+        <div class="lg:tw-w-[80%] tw-mx-auto tw-px-5 lg:tw-px-1">
+          <div class="tw-grid xl:tw-grid-cols-3 sm:tw-grid-cols-2 tw-gap-5">
+            <!-- single projects -->
+            <div
+              v-for="pr in projects"
+              :key="pr.name"
+              data-aos="fade-up"
+              class="lg:tw-h-[400px] sm:tw-h-[600px] tw-h-[400px] tw-overflow-hidden item tw-sticky tw-top-0 tw-rounded-lg each-project"
+            >
+              <div class="tw-h-full tw-w-full">
+                <q-img
+                  :src="'/assets/images/project/' + pr.Image"
+                  :alt="pr.alt || pr.desc"
+                  class="tw-w-full tw-h-full tw-object-cover tw-object-center tw-rounded-lg"
+                />
+                <div class="pr-content">
+                  <div class="tw-w-full tw-h-full tw-flex tw-items-center">
+                    <div class="tw-px-2 tw-text-white">
+                      <h2
+                        class="text-h5 tw-leading-none tw-font-extrabold tw-line-clamp-4"
+                      >
+                        {{ pr.title }}
+                      </h2>
+                      <p
+                        class="tw-my-2 text-subtitle1 tw-leading-normal tw-line-clamp-4 hover:tw-line-clamp-none tw-transition-all tw-ease-linear tw-duration-300"
+                      >
+                        {{ pr.desc }}
+                      </p>
+                      <p class="tw-capitalize tw-mb-2">
+                        <span class="text-primary"><b>Frontend:</b> </span>
+                        {{ pr.frontend }}
+                      </p>
+                      <p class="tw-capitalize">
+                        <span class="text-primary"><b>Backend:</b> </span>
+                        {{ pr.backend }}
+                      </p>
+                      <div class="tw-flex tw-gap-3 tw-mt-4">
+                        <q-btn
+                          icon="fab fa-github"
+                          dense
+                          size="sm"
+                          :href="pr.link.github || '#'"
+                          rel="noreferrer"
+                          target="_blank"
+                        />
+                        <q-btn
+                          icon="fa-solid fa-arrow-up-right-from-square"
+                          dense
+                          size="sm"
+                          :href="pr.link.web || '#'"
+                          rel="noreferrer"
+                          target="_blank"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div class="image">
-                    <q-img
-                      :src="project.img"
-                      :alt="project.title"
-                      style="scale: 1.2"
-                    />
-                  </div>
-                </div>
-                <div class="content">
-                  <h4 class="title">
-                    <a :href="project.link">{{ project.title }}</a>
-                  </h4>
-                  <ul class="catagory-nav-item">
-                    <li>{{ project.comment }}</li>
-                  </ul>
                 </div>
               </div>
-              <!-- End Project Box Single Item -->
             </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
+            <!-- single projects -->
           </div>
         </div>
       </div>
@@ -72,58 +89,110 @@
   <!-- ...::: End Project Display Section :::... -->
 </template>
 
-
 <script setup>
-import { ref, onMounted, inject } from 'vue';
-import { useQuasar } from 'quasar';
-
-const projects = ref([]);
-const $q = useQuasar();
-const api = inject('backend');
-
-const getProjects = async () => {
-  try {
-    const response = await fetch(`${api}/projects`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    projects.value = data;
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-  }
-};
-
-onMounted(() => {
-  getProjects();
-
-  const swiper = new Swiper('.prt-swipe', {
-    slidesPerView: $q.screen.md ? 2 : 1,
-    loop: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
+const projects = [
+  {
+    title: 'Ireneaus Fashion Store',
+    frontend: 'Talwindcss, JavaScript, Vuejs, Quasar Framework',
+    backend: 'Node.js, Express.js, mysql, sequelize',
+    desc: 'Stunning e-commerce website, with authentication, PWA, SEO-optimized and Flutterwave payment gatway integrated. ',
+    Image: 'ifs.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://f-store-demo.netlify.app',
     },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+  },
+
+  {
+    title: 'Bitzoic Market',
+    frontend: 'HTML, CSS, JavaScript',
+    backend: 'python, django, mysql',
+    desc: 'Buy and Invest in cryptocurrencies and other digital assets. cloned from oneIdx.com',
+    Image: 'bitzoicmarket.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://bitzoicmarket.com',
     },
-    spaceBetween: 30,
-  });
+  },
 
-  // Define these methods so that they can be used in the template
-  const prevSlide = () => {
-    swiper.slidePrev();
-  };
+  {
+    title: 'Financial Growths',
+    frontend: 'HTML, CSS, JavaScript',
+    backend: 'python, django, mysql',
+    desc: 'Buy and Invest in cryptocurrencies and other digital assets. duplicate of Bitzoic Market',
+    Image: 'financialgrowths.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://financial-growths.com',
+    },
+  },
 
-  const nextSlide = () => {
-    swiper.slideNext();
-  };
+  {
+    title: 'Ireneaus Jewelry Store',
+    frontend: 'JavaScript, vue.js, nuxt.js, vuetify',
+    backend: '',
+    desc: 'Simple yet fancy e-commerce website(side project), for Jewelry products and fashion',
+    Image: 'irjewelrystore.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://irjewelrystore.netlify.app',
+    },
+  },
+  {
+    title: 'Digital Assets Growths',
+    frontend: 'JavaScript, vue.js, nuxt.js, vuetify',
+    backend: 'python, django, mysql',
+    desc: 'Buy and Invest in cryptocurrencies and other digital assets',
+    Image: 'digitalassetshome.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://digitalassetsgrowth.com',
+    },
+  },
 
-  // Return these methods to make them available in the template
-  return {
-    prevSlide,
-    nextSlide,
-  };
-});
+  {
+    title: 'CodXtreme',
+    frontend: 'tailwindcss, JavaScript, react.js, next.js',
+    backend: '',
+    desc: 'Fancy digital marketing agency website(side project)',
+    Image: 'codextreme.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://codxtreme.netlify.app',
+    },
+  },
+];
 </script>
+
+<style scoped lang="scss">
+.item {
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    // transform: skewX(-45deg) translateX(-100%);
+    width: 100%;
+    height: 100%;
+    content: '';
+    z-index: 1;
+    background-color: transparentize($color: #000000, $amount: 0.6);
+    border-radius: 8px;
+  }
+}
+.pr-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  z-index: 2;
+  background-color: transparentize($color: #252734, $amount: 0.2);
+  border-radius: 8px 0 0 8px;
+}
+</style>

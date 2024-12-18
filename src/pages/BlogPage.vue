@@ -42,7 +42,7 @@
               >
                 <div class="inner-shape inner-shape-top-right"></div>
                 <a href="#" class="image">
-                  <q-img :src="blog.prev_img" alt="" />
+                  <q-img :src="blog.prev_img" :alt="blog.img_alt" />
                 </a>
                 <div class="content">
                   <div class="post-meta-1">
