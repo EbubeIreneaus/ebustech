@@ -154,7 +154,18 @@ const projects = [
       web: 'https://digitalassetsgrowth.com',
     },
   },
-
+  {
+    title: 'Ebustech',
+    frontend: 'Tailwindcss, JavaScript, vue.js, quasar framework',
+    backend: '',
+    desc: 'Eye catching portfolio website for myself. feel free browsing through my projects catalog.',
+    Image: 'ebustech.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://ebustech.netlify.app',
+    },
+  },
   {
     title: 'CodXtreme',
     frontend: 'tailwindcss, JavaScript, react.js, next.js',
@@ -165,6 +176,31 @@ const projects = [
     link: {
       github: '',
       web: 'https://codxtreme.netlify.app',
+    },
+  },
+  {
+    title: 'Sales Analysis Software',
+    frontend: 'HTML, tailwindcss, JavaScript, vue.js, quasar framework',
+    backend: 'node.js, express.js, mysql, sequelize',
+    desc: 'features include analysing income... uploading and editing product.. contact me for logins. ',
+    Image: 'salesanalysis.webp',
+    imgAlt: 'sales Analysis Software, analyse income, expense and sales, upload and manage products, staffs and users, sales and expenses.. ',
+    link: {
+      github: '',
+      web: 'https://demo-sales-dashboard.netlify.app',
+    },
+  },
+
+  {
+    title: 'School Result Portal',
+    frontend: 'HTML, tailwindcss, JavaScript, vue.js, quasar framework',
+    backend: '',
+    desc: 'Result system for schools. username: student or teacher password: 123456',
+    Image: 'school-result-portal.webp',
+    imgAlt: '',
+    link: {
+      github: '',
+      web: 'https://cshs-r-p.netlify.app',
     },
   },
 ];
