@@ -131,6 +131,20 @@ const projects = [
   },
 
   {
+    title: 'Golden Wealths',
+    frontend: 'Bootstrap, JavaScript, Angularjs, Jquery',
+    backend: 'PHP, Mysql',
+    desc: 'Golden wealths investment website ',
+    Image: 'gwealths.webp',
+    imgAlt: null,
+    link: {
+      github: '',
+      web: 'https://goldenwealths.com',
+    },
+  },
+
+
+  {
     title: 'Ireneaus Jewelry Store',
     frontend: 'JavaScript, vue.js, nuxt.js, vuetify',
     backend: '',
