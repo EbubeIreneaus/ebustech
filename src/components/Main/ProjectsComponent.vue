@@ -91,6 +91,19 @@
 
 <script setup>
 const projects = [
+{
+    title: 'Okis Real Estate',
+    frontend: 'Talwindcss, JavaScript, React.js, Next.js',
+    backend: '',
+    desc: 'showcasing my ability in developing a UI frendly real estate and property management website',
+    Image: 'okisestate.webp',
+    imgAlt: 'okis real estate website, full page screenshot',
+    link: {
+      github: '',
+      web: 'https://okis-real-estate.vercel.app',
+    },
+  },
+
   {
     title: 'Ireneaus Fashion Store',
     frontend: 'Talwindcss, JavaScript, Vuejs, Quasar Framework',
